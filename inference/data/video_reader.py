@@ -76,8 +76,9 @@ class VideoReader(Dataset):
             self.size_dir = self.image_dir
         else:
             self.size_dir = size_dir
-        
-        self.frames = sorted(os.listdir(self.image_dir))
+
+        image_files = os.listdir(self.image_dir)
+        self.frames = sorted(image_files, key=lambda x: int(x.split('.')[0]))
 
     def __getitem__(self, idx) -> Sample:
         data = {}
